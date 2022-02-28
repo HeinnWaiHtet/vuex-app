@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div 
-                class="col-md-4"
+                class="col-md-4 my-4"
                 v-for="todo in myTodos"
                 :key="todo.id">
                 <b-card bg-variant="primary" text-variant="white" header="primary" class="text-center">
@@ -19,14 +19,19 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
     mounted(){
         console.log(this.myTodos);
+        this.getTodos();
     },
     computed:{
         // destructing vuex getter function
         ...mapGetters(["myTodos"])
+    },
+    methods:{
+        // destructing vuex actions methods
+        ...mapActions(['getTodos'])
     }
 }
 </script>
