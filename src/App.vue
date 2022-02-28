@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <h1> {{$store.state.Todos.sayHello}} </h1>
+    <Todos></Todos>
   </div>
 </template>
 
 <script>
 
+import Todos from './components/Todos'
 export default {
   name: 'App',
   components: {
+    Todos,
   },
   mounted(){
-    console.log(this.$store.state.Todos.sayHello);
   }
 }
 </script>
