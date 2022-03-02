@@ -28,6 +28,11 @@ export default {
       state.todos.unshift(newTodo);
     },
 
+    /**
+     * delete post by request id
+     * @param {state} state
+     * @param {number} removeId
+     */
     deleteTodo(state, removeId) {
       state.todos = state.todos.filter((t) => {
         return t.id != removeId;
@@ -60,6 +65,11 @@ export default {
       context.commit("addTodo", response.data);
     },
 
+    /**
+     * delete todo by request id
+     * @param {context} context
+     * @param {number} removeId
+     */
     async deleteTodo(context, removeId) {
       await axios.delete(
         `https://jsonplaceholder.typicode.com/todos/${removeId}`
