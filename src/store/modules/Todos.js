@@ -38,6 +38,19 @@ export default {
         return t.id != removeId;
       });
     },
+
+    /**
+     * update todo data by request todo id
+     * @param {state} state
+     * @param {object} todo
+     */
+    updateTodo(state, todo) {
+      state.todos.forEach((task) => {
+        if (task.id === todo.id) {
+          task = todo;
+        }
+      });
+    },
   },
   actions: {
     /**
@@ -87,6 +100,19 @@ export default {
         `https://jsonplaceholder.typicode.com/todos?_limit=${limit}`
       );
       context.commit("setTodos", response.data);
+    },
+
+    /**
+     * update todo by user request data
+     * @param {context} context
+     * @param {object} todo
+     */
+    async updateTodo(context, todo) {
+      let response = await axios.put(
+        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
+        todo
+      );
+      context.commit("updateTodo", response.data);
     },
   },
 };

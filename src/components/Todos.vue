@@ -11,7 +11,10 @@
                 class="col-md-4 my-4"
                 v-for="todo in myTodos"
                 :key="todo.id">
-                <b-card bg-variant="primary" text-variant="white">
+                <b-card
+                 :bg-variant="dynamicBackground(todo)"
+                 @dblclick="changeComplete(todo)"
+                  text-variant="white">
                     <b-card-text class="d-flex justify-content-between">
                         <span>
                             {{todo.title}}
@@ -42,8 +45,21 @@ export default {
         ...mapGetters(["myTodos"])
     },
     methods:{
+        /**
+         * add dynamic background color by complete state
+         * @param {object} todo
+         */
+        dynamicBackground(todo){
+            return todo.completed ? 'success' : 'primary';
+        },
+
+        changeComplete(todo){
+            todo.completed = !todo.completed;
+            this.updateTodo(todo);
+        },
+
         // destructing vuex actions methods
-        ...mapActions(['getTodos', 'deleteTodo'])
+        ...mapActions(['getTodos', 'deleteTodo', 'updateTodo'])
     }
 }
 </script>
