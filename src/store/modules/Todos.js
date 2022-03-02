@@ -76,5 +76,17 @@ export default {
       );
       context.commit("deleteTodo", removeId);
     },
+
+    /**
+     * get todo list by filter request number
+     * @param {context} context
+     * @param {number} limit
+     */
+    async filterTodos(context, limit) {
+      let response = await axios.get(
+        `https://jsonplaceholder.typicode.com/todos?_limit=${limit}`
+      );
+      context.commit("setTodos", response.data);
+    },
   },
 };

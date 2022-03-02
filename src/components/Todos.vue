@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row">
             <AddTodo></AddTodo>
+            <FilterTodo></FilterTodo>
         </div>
         <div class="row">
             <div 
@@ -27,10 +28,12 @@
 </template>
 
 <script>
+import FilterTodo from './FilterTodo'
 import AddTodo from './AddTodo'
 import { mapGetters, mapActions } from 'vuex'
 export default {
-  components: { AddTodo },
+  components: {
+    FilterTodo, AddTodo },
     mounted(){
         this.getTodos();
     },
