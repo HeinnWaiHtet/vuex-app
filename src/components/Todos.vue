@@ -3,13 +3,21 @@
     <h1 class="text-primary">All Todos</h1>
     <div class="container">
         <div class="row">
+            <AddTodo></AddTodo>
+        </div>
+        <div class="row">
             <div 
                 class="col-md-4 my-4"
                 v-for="todo in myTodos"
                 :key="todo.id">
-                <b-card bg-variant="primary" text-variant="white" header="primary" class="text-center">
-                    <b-card-text>
-                        {{todo.title}}
+                <b-card bg-variant="primary" text-variant="white">
+                    <b-card-text class="d-flex justify-content-between">
+                        <span>
+                            {{todo.title}}
+                        </span>
+                        <span @click="deleteTodo(todo.id)">
+                            <b-icon icon="trash-fill" variant="danger"></b-icon>
+                        </span>
                     </b-card-text>
                 </b-card>
             </div>
@@ -19,10 +27,11 @@
 </template>
 
 <script>
+import AddTodo from './AddTodo'
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  components: { AddTodo },
     mounted(){
-        console.log(this.myTodos);
         this.getTodos();
     },
     computed:{
@@ -31,7 +40,7 @@ export default {
     },
     methods:{
         // destructing vuex actions methods
-        ...mapActions(['getTodos'])
+        ...mapActions(['getTodos', 'deleteTodo'])
     }
 }
 </script>
